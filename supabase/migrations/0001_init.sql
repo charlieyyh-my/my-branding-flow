@@ -196,6 +196,6 @@ insert into brand_guidelines (id, section_title, content, display_order) values
   ('f1000000-0000-0000-0000-000000000004', 'Logo Rules', 'Always use approved logo files from the asset library. Minimum clear space: 20px. Never place on busy backgrounds without a white/dark overlay.', 4);
 
 insert into leads_enquiries (id, contact_name, company, enquiry_type, source, status, notes, follow_up_date) values
-  ('g1000000-0000-0000-0000-000000000001', 'David Khor', 'Petronas Dagangan', 'Corporate gifting — CNY', 'LinkedIn DM', 'new', 'Interested in 50-unit Feitian gift sets for CNY', '2025-01-16'),
-  ('g1000000-0000-0000-0000-000000000002', 'Michelle Yeoh', 'CIMB Bank', 'Bulk purchase enquiry', 'Website contact form', 'in_progress', 'Needs quotation for 100 bottles across 3 variants', '2025-01-17'),
-  ('g1000000-0000-0000-0000-000000000003', 'Raymond Lim', 'Self', 'Retail purchase', 'Instagram DM', 'closed_won', 'Purchased 2 bottles of Moutai 1935', null);
+  ('a9000000-0000-0000-0000-000000000001', 'David Khor', 'Petronas Dagangan', 'Corporate gifting — CNY', 'LinkedIn DM', 'new', 'Interested in 50-unit Feitian gift sets for CNY', '2025-01-16'),
+  ('a9000000-0000-0000-0000-000000000002', 'Michelle Yeoh', 'CIMB Bank', 'Bulk purchase enquiry', 'Website contact form', 'in_progress', 'Needs quotation for 100 bottles across 3 variants', '2025-01-17'),
+  ('a9000000-0000-0000-0000-000000000003', 'Raymond Lim', 'Self', 'Retail purchase', 'Instagram DM', 'closed_won', 'Purchased 2 bottles of Moutai 1935', null);
