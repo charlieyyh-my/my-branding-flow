@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { setContentStatus } from "@/lib/actions";
 import { CONTENT_STATUSES } from "@/lib/types";
 import { label } from "@/lib/format";
+import { toast } from "@/components/Toast";
 
 export function StatusControl({
   id,
@@ -33,6 +34,7 @@ export function StatusControl({
     startTransition(async () => {
       try {
         await setContentStatus(fd);
+        toast(`Moved to ${label(next)}`);
         router.refresh();
       } catch (e) {
         setError(e instanceof Error ? e.message : "Failed to update status.");

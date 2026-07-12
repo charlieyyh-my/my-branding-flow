@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getContentItems, getCampaigns } from "@/lib/data";
-import { PageHeader, StatusBadge, PlatformBadge, EmptyState, ErrorState, ConfigNotice } from "@/components/ui";
+import { PageHeader, StatusBadge, PlatformBadge, CampaignTag, EmptyState, ErrorState, ConfigNotice } from "@/components/ui";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -30,6 +30,7 @@ export default async function ContentListPage() {
         <ErrorState message={items.error} />
       ) : items.data.length === 0 ? (
         <EmptyState
+          icon="✍️"
           title="No content yet"
           hint="Create your first content item to start planning the week."
           action={
@@ -94,9 +95,14 @@ export default async function ContentListPage() {
                     <PlatformBadge value={item.platform} />
                   </td>
                   <td className="px-4 py-3 text-stone-600">
-                    {item.campaign_id
-                      ? campaignName.get(item.campaign_id) ?? "—"
-                      : "—"}
+                    {item.campaign_id ? (
+                      <CampaignTag
+                        id={item.campaign_id}
+                        name={campaignName.get(item.campaign_id) ?? "—"}
+                      />
+                    ) : (
+                      "—"
+                    )}
                   </td>
                   <td className="px-4 py-3 text-stone-600">
                     {formatDate(item.scheduled_date)}

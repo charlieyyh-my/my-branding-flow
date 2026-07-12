@@ -8,6 +8,7 @@ import { LEAD_STATUSES } from "@/lib/types";
 import { label } from "@/lib/format";
 import { SubmitButton } from "@/components/SubmitButton";
 import { FieldError } from "@/components/ui";
+import { toast } from "@/components/Toast";
 
 export function LeadForm({
   action,
@@ -19,7 +20,10 @@ export function LeadForm({
   const [state, formAction] = useActionState(action, {});
   const router = useRouter();
   useEffect(() => {
-    if (state.ok) router.refresh();
+    if (state.ok) {
+      toast("Changes saved");
+      router.refresh();
+    }
   }, [state.ok, router]);
 
   return (

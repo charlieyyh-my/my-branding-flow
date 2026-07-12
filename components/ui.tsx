@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { label } from "@/lib/format";
 import { PLATFORM_META } from "@/lib/platforms";
+import { campaignColor } from "@/lib/campaign-color";
 
 export function PageHeader({
   title,
@@ -85,17 +86,28 @@ export function EmptyState({
   title,
   hint,
   action,
+  icon = "🗂️",
 }: {
   title: string;
   hint?: string;
   action?: React.ReactNode;
+  icon?: string;
 }) {
   return (
     <div className="card flex flex-col items-center justify-center gap-3 p-12 text-center">
-      <div className="text-3xl">🗂️</div>
-      <p className="font-medium text-stone-700">{title}</p>
+      <div
+        className="flex h-16 w-16 items-center justify-center rounded-full text-3xl"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 35%, rgba(201,168,76,0.22), rgba(201,168,76,0.08))",
+        }}
+        aria-hidden
+      >
+        {icon}
+      </div>
+      <p className="text-base font-semibold text-stone-800">{title}</p>
       {hint ? <p className="max-w-sm text-sm text-stone-500">{hint}</p> : null}
-      {action}
+      {action ? <div className="mt-1">{action}</div> : null}
     </div>
   );
 }
@@ -160,6 +172,32 @@ export function StatCard({
     </div>
   );
   return href ? <Link href={href}>{inner}</Link> : inner;
+}
+
+export function CampaignDot({ seed }: { seed?: string | null }) {
+  return (
+    <span
+      className="inline-block h-2.5 w-2.5 shrink-0 rounded-full"
+      style={{ background: campaignColor(seed) }}
+      aria-hidden
+    />
+  );
+}
+
+export function CampaignTag({
+  id,
+  name,
+}: {
+  id?: string | null;
+  name?: string | null;
+}) {
+  if (!name) return <span className="text-stone-400">—</span>;
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <CampaignDot seed={id ?? name} />
+      <span className="truncate">{name}</span>
+    </span>
+  );
 }
 
 export function FieldError({ message }: { message?: string }) {

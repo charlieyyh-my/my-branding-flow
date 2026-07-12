@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createPerformance } from "@/lib/actions";
 import { SubmitButton } from "@/components/SubmitButton";
 import { FieldError } from "@/components/ui";
+import { toast } from "@/components/Toast";
 
 export function PerformanceForm({
   contentItemId,
@@ -19,6 +20,7 @@ export function PerformanceForm({
 
   useEffect(() => {
     if (state.ok) {
+      toast("Performance logged");
       formRef.current?.reset();
       router.refresh();
     }

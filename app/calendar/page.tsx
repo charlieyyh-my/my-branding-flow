@@ -91,6 +91,7 @@ export default async function CalendarPage({
         <ErrorState message={items.error} />
       ) : !weekHasContent ? (
         <EmptyState
+          icon="🗓️"
           title="No content scheduled this week"
           hint="Use Prev/Next to browse other weeks, or add a new content item scheduled for this week."
           action={

@@ -9,6 +9,7 @@ import { PLATFORMS, CONTENT_STATUSES } from "@/lib/types";
 import { label } from "@/lib/format";
 import { SubmitButton } from "@/components/SubmitButton";
 import { FieldError } from "@/components/ui";
+import { toast } from "@/components/Toast";
 
 export function ContentForm({
   action,
@@ -26,7 +27,10 @@ export function ContentForm({
 
   // On successful edit (no redirect), refresh so server data re-renders.
   useEffect(() => {
-    if (state.ok) router.refresh();
+    if (state.ok) {
+      toast("Changes saved");
+      router.refresh();
+    }
   }, [state.ok, router]);
 
   return (

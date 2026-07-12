@@ -3,6 +3,7 @@ import { getCampaigns, getContentItems } from "@/lib/data";
 import {
   PageHeader,
   StatusBadge,
+  CampaignDot,
   EmptyState,
   ErrorState,
   ConfigNotice,
@@ -37,6 +38,7 @@ export default async function CampaignsPage() {
         <ErrorState message={campaigns.error} />
       ) : campaigns.data.length === 0 ? (
         <EmptyState
+          icon="🎯"
           title="No campaigns yet"
           hint="Create a campaign to organise your content."
           action={
@@ -54,7 +56,10 @@ export default async function CampaignsPage() {
               className="card p-5 transition hover:shadow-md"
             >
               <div className="mb-2 flex items-start justify-between gap-2">
-                <h3 className="font-semibold text-stone-900">{c.name}</h3>
+                <h3 className="flex items-center gap-2 font-semibold text-stone-900">
+                  <CampaignDot seed={c.id} />
+                  {c.name}
+                </h3>
                 <StatusBadge value={c.status} />
               </div>
               {c.objective ? (

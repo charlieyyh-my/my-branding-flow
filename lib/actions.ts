@@ -110,7 +110,7 @@ export async function createContentItem(
   revalidatePath("/content");
   revalidatePath("/calendar");
   revalidatePath("/");
-  redirect(`/content/${newId}`);
+  redirect(`/content/${newId}?flash=Content+item+created`);
 }
 
 export async function updateContentItem(
@@ -209,7 +209,7 @@ export async function deleteContentItem(fd: FormData) {
   revalidatePath("/content");
   revalidatePath("/calendar");
   revalidatePath("/");
-  redirect("/content");
+  redirect("/content?flash=Content+updated");
 }
 
 /* ─────────────────────────── Campaigns ─────────────────────────── */
@@ -251,7 +251,7 @@ export async function createCampaign(
   });
   revalidatePath("/campaigns");
   revalidatePath("/");
-  redirect("/campaigns");
+  redirect("/campaigns?flash=Campaigns+updated");
 }
 
 export async function updateCampaign(
@@ -275,7 +275,7 @@ export async function updateCampaign(
   revalidatePath("/campaigns");
   revalidatePath(`/campaigns/${id}`);
   revalidatePath("/");
-  redirect("/campaigns");
+  redirect("/campaigns?flash=Campaigns+updated");
 }
 
 export async function deleteCampaign(fd: FormData) {
@@ -305,7 +305,7 @@ export async function deleteCampaign(fd: FormData) {
   });
   revalidatePath("/campaigns");
   revalidatePath("/");
-  redirect("/campaigns");
+  redirect("/campaigns?flash=Campaigns+updated");
 }
 
 /* ─────────────────────────── Weekly themes ─────────────────────────── */
@@ -334,7 +334,7 @@ export async function createTheme(
     return { error: e instanceof Error ? e.message : "Failed to create." };
   }
   revalidatePath("/themes");
-  redirect("/themes");
+  redirect("/themes?flash=Themes+updated");
 }
 
 export async function updateTheme(
@@ -357,7 +357,7 @@ export async function updateTheme(
     return { error: e instanceof Error ? e.message : "Failed to update." };
   }
   revalidatePath("/themes");
-  redirect("/themes");
+  redirect("/themes?flash=Themes+updated");
 }
 
 export async function deleteTheme(fd: FormData) {
@@ -371,7 +371,7 @@ export async function deleteTheme(fd: FormData) {
   const { error } = await supabase.from("weekly_themes").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/themes");
-  redirect("/themes");
+  redirect("/themes?flash=Themes+updated");
 }
 
 /* ─────────────────────────── Marketing assets ─────────────────────────── */
@@ -402,7 +402,7 @@ export async function createAsset(
     return { error: e instanceof Error ? e.message : "Failed to create." };
   }
   revalidatePath("/assets");
-  redirect("/assets");
+  redirect("/assets?flash=Assets+updated");
 }
 
 export async function updateAsset(
@@ -425,7 +425,7 @@ export async function updateAsset(
     return { error: e instanceof Error ? e.message : "Failed to update." };
   }
   revalidatePath("/assets");
-  redirect("/assets");
+  redirect("/assets?flash=Assets+updated");
 }
 
 export async function deleteAsset(fd: FormData) {
@@ -435,7 +435,7 @@ export async function deleteAsset(fd: FormData) {
   const { error } = await supabase.from("marketing_assets").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/assets");
-  redirect("/assets");
+  redirect("/assets?flash=Assets+updated");
 }
 
 /* ─────────────────────────── SEO keywords ─────────────────────────── */
@@ -464,7 +464,7 @@ export async function createKeyword(
     return { error: e instanceof Error ? e.message : "Failed to create." };
   }
   revalidatePath("/keywords");
-  redirect("/keywords");
+  redirect("/keywords?flash=Keywords+updated");
 }
 
 export async function updateKeyword(
@@ -486,7 +486,7 @@ export async function updateKeyword(
     return { error: e instanceof Error ? e.message : "Failed to update." };
   }
   revalidatePath("/keywords");
-  redirect("/keywords");
+  redirect("/keywords?flash=Keywords+updated");
 }
 
 export async function deleteKeyword(fd: FormData) {
@@ -496,7 +496,7 @@ export async function deleteKeyword(fd: FormData) {
   const { error } = await supabase.from("seo_keywords").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/keywords");
-  redirect("/keywords");
+  redirect("/keywords?flash=Keywords+updated");
 }
 
 /* ─────────────────────────── Leads & enquiries ─────────────────────────── */
@@ -540,7 +540,7 @@ export async function createLead(
   });
   revalidatePath("/leads");
   revalidatePath("/");
-  redirect("/leads");
+  redirect("/leads?flash=Leads+updated");
 }
 
 export async function updateLead(
@@ -622,7 +622,7 @@ export async function deleteLead(fd: FormData) {
   });
   revalidatePath("/leads");
   revalidatePath("/");
-  redirect("/leads");
+  redirect("/leads?flash=Leads+updated");
 }
 
 /* ─────────────────────────── Brand guidelines ─────────────────────────── */
@@ -656,7 +656,7 @@ export async function createGuideline(
     risk_level: "medium",
   });
   revalidatePath("/guidelines");
-  redirect("/guidelines");
+  redirect("/guidelines?flash=Guidelines+updated");
 }
 
 export async function updateGuideline(
@@ -685,7 +685,7 @@ export async function updateGuideline(
     risk_level: "medium",
   });
   revalidatePath("/guidelines");
-  redirect("/guidelines");
+  redirect("/guidelines?flash=Guidelines+updated");
 }
 
 export async function deleteGuideline(fd: FormData) {
@@ -695,7 +695,7 @@ export async function deleteGuideline(fd: FormData) {
   const { error } = await supabase.from("brand_guidelines").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/guidelines");
-  redirect("/guidelines");
+  redirect("/guidelines?flash=Guidelines+updated");
 }
 
 /* ─────────────────────────── Social performance ─────────────────────────── */

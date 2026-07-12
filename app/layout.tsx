@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { MobileNav } from "@/components/MobileNav";
+import { Toaster } from "@/components/Toast";
 
 export const metadata: Metadata = {
   title: "BrandOS — Century Mark Pacific",
@@ -50,6 +51,7 @@ export default function RootLayout({
             </main>
           </div>
         </div>
+        <Toaster />
       </body>
     </html>
   );

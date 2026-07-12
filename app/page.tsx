@@ -10,6 +10,7 @@ import {
   StatCard,
   Card,
   StatusBadge,
+  CampaignDot,
   ConfigNotice,
   ErrorState,
 } from "@/components/ui";
@@ -199,8 +200,9 @@ export default async function DashboardPage() {
                     <div className="min-w-0">
                       <Link
                         href={`/campaigns/${c.id}`}
-                        className="block truncate text-sm font-medium text-stone-800 hover:text-[var(--brand-red)]"
+                        className="flex items-center gap-2 truncate text-sm font-medium text-stone-800 hover:text-[var(--brand-red)]"
                       >
+                        <CampaignDot seed={c.id} />
                         {c.name}
                       </Link>
                       <div className="text-xs text-stone-400">

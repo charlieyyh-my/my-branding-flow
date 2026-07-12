@@ -32,6 +32,7 @@ export default async function LeadsPage() {
         <ErrorState message={leads.error} />
       ) : leads.data.length === 0 ? (
         <EmptyState
+          icon="📨"
           title="No enquiries yet"
           hint="Add your first lead."
           action={
