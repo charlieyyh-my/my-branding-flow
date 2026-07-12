@@ -48,7 +48,7 @@ export default async function AssetsPage() {
             <Link
               key={a.id}
               href={`/assets/${a.id}`}
-              className="card overflow-hidden transition hover:shadow-md"
+              className="card lift overflow-hidden"
             >
               <div className="aspect-video bg-[var(--surface-2)]">
                 {a.file_url ? (

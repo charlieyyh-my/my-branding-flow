@@ -54,7 +54,7 @@ export default async function ThemesPage() {
               <Link
                 key={t.id}
                 href={`/themes/${t.id}`}
-                className="card block p-5 transition hover:shadow-md"
+                className="card lift block p-5"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h3 className="font-semibold text-[var(--ink)]">{t.theme_name}</h3>

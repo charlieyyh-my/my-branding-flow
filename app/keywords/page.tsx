@@ -54,7 +54,7 @@ export default async function KeywordsPage() {
               <Link
                 key={k.id}
                 href={`/keywords/${k.id}`}
-                className="card block p-4 transition active:bg-[var(--surface-2)]"
+                className="card lift block p-4"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 font-medium text-[var(--ink)]">

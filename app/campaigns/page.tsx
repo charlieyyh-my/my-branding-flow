@@ -53,7 +53,7 @@ export default async function CampaignsPage() {
             <Link
               key={c.id}
               href={`/campaigns/${c.id}`}
-              className="card p-5 transition hover:shadow-md"
+              className="card lift p-5"
             >
               <div className="mb-2 flex items-start justify-between gap-2">
                 <h3 className="flex items-center gap-2 font-semibold text-[var(--ink)]">

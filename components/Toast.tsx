@@ -58,7 +58,7 @@ export function Toaster() {
         <div
           key={t.id}
           role="status"
-          className="pointer-events-auto flex items-center gap-2 rounded-full border border-[var(--border-warm)] bg-[var(--ink)] px-4 py-2.5 text-sm font-medium text-white shadow-lg"
+          className="toast-in pointer-events-auto flex items-center gap-2 rounded-full bg-[var(--ink)] px-4 py-2.5 text-sm font-semibold text-[var(--page)] shadow-2xl"
         >
           <span
             className="flex h-4 w-4 items-center justify-center rounded-full text-[11px]"

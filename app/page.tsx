@@ -8,6 +8,7 @@ import {
   ErrorState,
 } from "@/components/ui";
 import { GettingStarted } from "@/components/GettingStarted";
+import { CountUp } from "@/components/CountUp";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -77,7 +78,7 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Friendly greeting */}
-      <div>
+      <div className="animate-in">
         <h1 className="text-2xl font-bold tracking-tight text-[var(--ink)]">
           Your content workspace
         </h1>
@@ -88,20 +89,25 @@ export default async function DashboardPage() {
       </div>
 
       {/* Step-by-step guide */}
-      <GettingStarted
-        hasContent={items.length > 0}
-        hasReviewed={items.some((i) => i.status !== "draft")}
-        hasPublished={items.some((i) => i.status === "published")}
-        hasLead={leads.data.length > 0}
-      />
+      <div className="animate-in" style={{ animationDelay: "60ms" }}>
+        <GettingStarted
+          hasContent={items.length > 0}
+          hasReviewed={items.some((i) => i.status !== "draft")}
+          hasPublished={items.some((i) => i.status === "published")}
+          hasLead={leads.data.length > 0}
+        />
+      </div>
 
       {/* Quick actions */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div
+        className="animate-in grid gap-4 sm:grid-cols-3"
+        style={{ animationDelay: "120ms" }}
+      >
         {QUICK_ACTIONS.map((a) => (
           <Link
             key={a.href}
             href={a.href}
-            className="card flex items-center gap-4 p-4 transition hover:brightness-110"
+            className="card lift flex items-center gap-4 p-4"
           >
             <span
               className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-2xl"
@@ -118,17 +124,20 @@ export default async function DashboardPage() {
       </div>
 
       {/* At a glance */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div
+        className="animate-in grid grid-cols-2 gap-3 sm:grid-cols-4"
+        style={{ animationDelay: "180ms" }}
+      >
         {PIPELINE.map((p) => (
           <Link
             key={p.status}
             href="/content"
-            className="card flex items-center gap-3 p-4 transition hover:brightness-110"
+            className="card lift flex items-center gap-3 p-4"
           >
             <span className="text-xl">{p.icon}</span>
             <div>
               <div className="text-2xl font-bold text-[var(--ink)]">
-                {countBy(p.status)}
+                <CountUp value={countBy(p.status)} />
               </div>
               <div className="text-xs text-[var(--ink-soft)]">{p.label}</div>
             </div>
@@ -137,7 +146,10 @@ export default async function DashboardPage() {
       </div>
 
       {/* Needs you */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div
+        className="animate-in grid gap-6 lg:grid-cols-2"
+        style={{ animationDelay: "240ms" }}
+      >
         <Card>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-semibold text-[var(--ink)]">
