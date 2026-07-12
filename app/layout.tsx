@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <div className="flex min-h-screen">
-          <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col overflow-y-auto border-r border-stone-200 bg-white p-4 md:flex">
+          <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col overflow-y-auto border-r border-[var(--border-warm)] bg-[var(--surface)] p-4 md:flex">
             <Link href="/" className="mb-6 flex items-center gap-2 px-2">
               <span
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-lg font-bold text-white"

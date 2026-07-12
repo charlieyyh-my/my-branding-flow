@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getContentItems, getCampaigns } from "@/lib/data";
-import { PageHeader, StatusBadge, EmptyState, ErrorState, ConfigNotice } from "@/components/ui";
+import { PageHeader, StatusBadge, PlatformBadge, EmptyState, ErrorState, ConfigNotice } from "@/components/ui";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -41,7 +41,7 @@ export default async function ContentListPage() {
       ) : (
         <div className="card overflow-x-auto">
           <table className="w-full min-w-[640px] text-sm">
-            <thead className="border-b border-stone-200 bg-stone-50 text-left text-xs uppercase tracking-wide text-stone-500">
+            <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 font-medium">Title</th>
                 <th className="px-4 py-3 font-medium">Platform</th>
@@ -50,9 +50,9 @@ export default async function ContentListPage() {
                 <th className="px-4 py-3 font-medium">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100">
+            <tbody className="divide-y divide-[var(--border-warm)]">
               {items.data.map((item) => (
-                <tr key={item.id} className="hover:bg-stone-50">
+                <tr key={item.id} className="row-hover">
                   <td className="px-4 py-3">
                     <Link
                       href={`/content/${item.id}`}
@@ -61,7 +61,9 @@ export default async function ContentListPage() {
                       {item.title}
                     </Link>
                   </td>
-                  <td className="px-4 py-3 text-stone-600">{item.platform}</td>
+                  <td className="px-4 py-3">
+                    <PlatformBadge value={item.platform} />
+                  </td>
                   <td className="px-4 py-3 text-stone-600">
                     {item.campaign_id
                       ? campaignName.get(item.campaign_id) ?? "—"

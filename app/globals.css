@@ -4,6 +4,14 @@
   --brand-red: #8b0000;
   --brand-gold: #c9a84c;
   --brand-ivory: #f5f0e8;
+
+  /* Warm surface system — cream page, soft ivory panels, warm hairlines. */
+  --page: #f6efe3;
+  --surface: #fffdf8;
+  --surface-2: #fbf6ec;
+  --border-warm: #e9ddc9;
+  --ink: #292018;
+  --ink-soft: #7c6f5e;
 }
 
 @theme inline {
@@ -14,8 +22,13 @@
 
 html,
 body {
-  background: #faf8f4;
-  color: #1c1917;
+  background-color: var(--page);
+  background-image: radial-gradient(
+    1200px 600px at 100% -10%,
+    rgba(201, 168, 76, 0.08),
+    transparent 60%
+  );
+  color: var(--ink);
 }
 
 body {
@@ -41,29 +54,42 @@ body {
 @layer components {
   /* Consistent form controls without repeating utility soup everywhere. */
   .field {
-    @apply w-full rounded-md border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 shadow-sm outline-none transition;
+    @apply w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-[var(--ink)] shadow-sm outline-none transition;
+    border-color: var(--border-warm);
   }
   .field:focus {
-    @apply border-[var(--brand-red)] ring-2 ring-[var(--brand-red)]/20;
+    @apply border-[var(--brand-red)] ring-2 ring-[var(--brand-red)]/15;
   }
 
   .field-label {
-    @apply mb-1 block text-sm font-medium text-stone-700;
+    @apply mb-1.5 block text-sm font-medium text-[var(--ink-soft)];
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-[var(--brand-red)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#6d0000] disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--brand-red)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#6d0000] hover:shadow disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-stone-50 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border bg-[var(--surface)] px-4 py-2 text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:bg-[var(--surface-2)] disabled:cursor-not-allowed disabled:opacity-60;
+    border-color: var(--border-warm);
   }
 
   .btn-danger {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .card {
-    @apply rounded-xl border border-stone-200 bg-white shadow-sm;
+    @apply rounded-2xl border shadow-sm;
+    background-color: var(--surface);
+    border-color: var(--border-warm);
+  }
+
+  /* Warm table header + hover, shared across list pages. */
+  .thead-warm {
+    background-color: var(--surface-2);
+    color: var(--ink-soft);
+  }
+  .row-hover:hover {
+    background-color: var(--surface-2);
   }
 }

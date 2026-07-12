@@ -43,7 +43,7 @@ export default async function LeadsPage() {
       ) : (
         <div className="card overflow-x-auto">
           <table className="w-full min-w-[680px] text-sm">
-            <thead className="border-b border-stone-200 bg-stone-50 text-left text-xs uppercase tracking-wide text-stone-500">
+            <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 font-medium">Contact</th>
                 <th className="px-4 py-3 font-medium">Company</th>
@@ -52,9 +52,9 @@ export default async function LeadsPage() {
                 <th className="px-4 py-3 font-medium">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100">
+            <tbody className="divide-y divide-[var(--border-warm)]">
               {leads.data.map((l) => (
-                <tr key={l.id} className="hover:bg-stone-50">
+                <tr key={l.id} className="row-hover">
                   <td className="px-4 py-3">
                     <Link
                       href={`/leads/${l.id}`}

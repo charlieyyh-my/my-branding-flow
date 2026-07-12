@@ -49,7 +49,7 @@ export default async function KeywordsPage() {
       ) : (
         <div className="card overflow-x-auto">
           <table className="w-full min-w-[640px] text-sm">
-            <thead className="border-b border-stone-200 bg-stone-50 text-left text-xs uppercase tracking-wide text-stone-500">
+            <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 font-medium">Keyword</th>
                 <th className="px-4 py-3 font-medium">Category</th>
@@ -57,9 +57,9 @@ export default async function KeywordsPage() {
                 <th className="px-4 py-3 font-medium">Target</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100">
+            <tbody className="divide-y divide-[var(--border-warm)]">
               {sorted.map((k) => (
-                <tr key={k.id} className="hover:bg-stone-50">
+                <tr key={k.id} className="row-hover">
                   <td className="px-4 py-3">
                     <Link
                       href={`/keywords/${k.id}`}

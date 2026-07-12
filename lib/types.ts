@@ -8,13 +8,8 @@ export const CONTENT_STATUSES: ContentStatus[] = [
   "published",
 ];
 
-export const PLATFORMS = [
-  "Instagram",
-  "LinkedIn",
-  "Facebook",
-  "WhatsApp",
-  "Website",
-] as const;
+// BrandOS focuses on three social channels only.
+export const PLATFORMS = ["Facebook", "Instagram", "Rednote"] as const;
 export type Platform = (typeof PLATFORMS)[number];
 
 export type CampaignStatus = "planned" | "active" | "completed";

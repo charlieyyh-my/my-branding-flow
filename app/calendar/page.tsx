@@ -3,6 +3,7 @@ import { getContentItems, getCampaigns } from "@/lib/data";
 import {
   PageHeader,
   StatusBadge,
+  PlatformBadge,
   EmptyState,
   ErrorState,
   ConfigNotice,
@@ -101,26 +102,29 @@ export default async function CalendarPage({
         <div className="card overflow-x-auto">
           <table className="w-full min-w-[900px] border-collapse text-sm">
             <thead>
-              <tr className="border-b border-stone-200 bg-stone-50">
-                <th className="w-28 px-3 py-3 text-left text-xs font-medium uppercase text-stone-500">
+              <tr className="thead-warm border-b border-[var(--border-warm)]">
+                <th className="w-32 px-3 py-3 text-left text-xs font-medium uppercase">
                   Platform
                 </th>
                 {days.map((d, i) => (
                   <th
                     key={d}
-                    className="px-2 py-3 text-left text-xs font-medium text-stone-500"
+                    className="px-2 py-3 text-left text-xs font-medium"
                   >
                     <div className="uppercase">{WEEKDAY_LABELS[i]}</div>
-                    <div className="text-stone-400">{formatDayMonth(d)}</div>
+                    <div className="opacity-70">{formatDayMonth(d)}</div>
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {PLATFORMS.map((platform) => (
-                <tr key={platform} className="border-b border-stone-100 align-top">
-                  <td className="px-3 py-3 text-xs font-semibold text-stone-600">
-                    {platform}
+                <tr
+                  key={platform}
+                  className="border-b border-[var(--border-warm)] align-top"
+                >
+                  <td className="px-3 py-3">
+                    <PlatformBadge value={platform} />
                   </td>
                   {days.map((d) => {
                     const cell = byDatePlatform.get(`${d}|${platform}`) ?? [];

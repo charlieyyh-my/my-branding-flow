@@ -41,7 +41,7 @@ export default async function AuditPage() {
       ) : (
         <div className="card overflow-x-auto">
           <table className="w-full min-w-[720px] text-sm">
-            <thead className="border-b border-stone-200 bg-stone-50 text-left text-xs uppercase tracking-wide text-stone-500">
+            <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 font-medium">When</th>
                 <th className="px-4 py-3 font-medium">Actor</th>
@@ -51,9 +51,9 @@ export default async function AuditPage() {
                 <th className="px-4 py-3 font-medium">Risk</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100">
+            <tbody className="divide-y divide-[var(--border-warm)]">
               {logs.data.map((l) => (
-                <tr key={l.id} className="hover:bg-stone-50">
+                <tr key={l.id} className="row-hover">
                   <td className="px-4 py-3 whitespace-nowrap text-stone-500">
                     {formatDateTime(l.created_at)}
                   </td>

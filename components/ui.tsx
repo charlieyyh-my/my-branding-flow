@@ -54,6 +54,53 @@ export function StatusBadge({ value }: { value: string | null | undefined }) {
   );
 }
 
+const PLATFORM_STYLES: Record<
+  string,
+  { chip: string; dot: string; mark: string }
+> = {
+  Facebook: {
+    chip: "bg-[#eef4ff] text-[#1877F2] border-[#d7e6ff]",
+    dot: "#1877F2",
+    mark: "f",
+  },
+  Instagram: {
+    chip: "bg-[#fdeef6] text-[#c13584] border-[#f6d3e6]",
+    dot: "#C13584",
+    mark: "◎",
+  },
+  Rednote: {
+    chip: "bg-[#fff0f1] text-[#ff2442] border-[#ffd4d9]",
+    dot: "#FF2442",
+    mark: "小",
+  },
+};
+
+export function PlatformBadge({ value }: { value: string | null | undefined }) {
+  const key = value ?? "";
+  const s = PLATFORM_STYLES[key];
+  if (!s) {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-stone-100 px-2.5 py-0.5 text-xs font-medium text-stone-600">
+        {value || "—"}
+      </span>
+    );
+  }
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${s.chip}`}
+    >
+      <span
+        className="flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold text-white"
+        style={{ background: s.dot }}
+        aria-hidden
+      >
+        {s.mark}
+      </span>
+      {value}
+    </span>
+  );
+}
+
 export function EmptyState({
   title,
   hint,

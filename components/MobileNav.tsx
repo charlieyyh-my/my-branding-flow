@@ -31,7 +31,7 @@ export function MobileNav() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-stone-200 bg-white/95 px-4 py-3 backdrop-blur md:hidden">
+      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-[var(--border-warm)] bg-[var(--surface)]/95 px-4 py-3 backdrop-blur md:hidden">
         <button
           type="button"
           onClick={() => setOpen(true)}
@@ -79,7 +79,7 @@ export function MobileNav() {
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r border-stone-200 bg-white p-4 shadow-xl transition-transform duration-200 md:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r border-[var(--border-warm)] bg-[var(--surface)] p-4 shadow-xl transition-transform duration-200 md:hidden ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
