@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CompletionCelebration } from "@/components/CompletionCelebration";
 
 interface Step {
   title: string;
@@ -60,6 +61,7 @@ export function GettingStarted({
 
   return (
     <section className="card overflow-hidden">
+      <CompletionCelebration allDone={allDone} />
       <div
         className="flex flex-wrap items-center justify-between gap-3 p-5"
         style={{

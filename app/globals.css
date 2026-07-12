@@ -73,6 +73,17 @@ body {
     transform: translateX(100%);
   }
 }
+@keyframes ringFill {
+  from {
+    stroke-dashoffset: var(--ring-from);
+  }
+  to {
+    stroke-dashoffset: var(--ring-to);
+  }
+}
+.ring-anim {
+  animation: ringFill 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
 .animate-in {
   animation: fadeInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;

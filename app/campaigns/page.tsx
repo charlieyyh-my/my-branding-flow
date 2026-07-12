@@ -8,6 +8,7 @@ import {
   ErrorState,
   ConfigNotice,
 } from "@/components/ui";
+import { ProgressRing } from "@/components/ProgressRing";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -19,6 +20,10 @@ export default async function CampaignsPage() {
   ]);
   const linkedCount = (id: string) =>
     content.data.filter((i) => i.campaign_id === id).length;
+  const publishedCount = (id: string) =>
+    content.data.filter(
+      (i) => i.campaign_id === id && i.status === "published",
+    ).length;
 
   return (
     <div>
@@ -67,13 +72,20 @@ export default async function CampaignsPage() {
                   {c.objective}
                 </p>
               ) : null}
-              <div className="flex items-center justify-between text-xs text-[var(--ink-faint)]">
-                <span>
-                  {formatDate(c.start_date)} – {formatDate(c.end_date)}
-                </span>
-                <span className="font-semibold text-[var(--brand-red)]">
-                  {linkedCount(c.id)} linked
-                </span>
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0 text-xs text-[var(--ink-faint)]">
+                  <div>
+                    {formatDate(c.start_date)} – {formatDate(c.end_date)}
+                  </div>
+                  <div className="mt-1 font-semibold text-[var(--brand-red)]">
+                    {linkedCount(c.id)} post{linkedCount(c.id) === 1 ? "" : "s"} ·{" "}
+                    {publishedCount(c.id)} published
+                  </div>
+                </div>
+                <ProgressRing
+                  done={publishedCount(c.id)}
+                  total={linkedCount(c.id)}
+                />
               </div>
             </Link>
           ))}
