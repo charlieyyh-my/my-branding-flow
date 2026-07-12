@@ -47,9 +47,36 @@ export default async function KeywordsPage() {
           }
         />
       ) : (
-        <div className="card overflow-x-auto">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
+        <>
+          {/* Mobile: stacked cards */}
+          <div className="space-y-3 md:hidden">
+            {sorted.map((k) => (
+              <Link
+                key={k.id}
+                href={`/keywords/${k.id}`}
+                className="card block p-4 transition active:bg-[var(--surface-2)]"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0 font-medium text-stone-900">
+                    {k.keyword}
+                  </div>
+                  <StatusBadge value={k.priority} />
+                </div>
+                <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-stone-500">
+                  {k.category ? <span>{k.category}</span> : null}
+                  {k.target_url ? <span className="text-[var(--brand-red)]">has target</span> : null}
+                </div>
+                {k.notes ? (
+                  <div className="mt-1 text-xs text-stone-400">{k.notes}</div>
+                ) : null}
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop / tablet: table */}
+          <div className="card hidden overflow-x-auto md:block">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 font-medium">Keyword</th>
                 <th className="px-4 py-3 font-medium">Category</th>
@@ -94,8 +121,9 @@ export default async function KeywordsPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
-        </div>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );

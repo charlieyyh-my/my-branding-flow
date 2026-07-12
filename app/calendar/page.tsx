@@ -18,6 +18,7 @@ import {
   WEEKDAY_LABELS,
 } from "@/lib/format";
 import { PLATFORMS } from "@/lib/types";
+import { platformColor } from "@/lib/platforms";
 import type { ContentItem } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
@@ -135,7 +136,8 @@ export default async function CalendarPage({
                             <Link
                               key={item.id}
                               href={`/content/${item.id}`}
-                              className="block rounded-md border border-stone-200 bg-white p-2 shadow-sm transition hover:border-[var(--brand-red)] hover:shadow"
+                              style={{ borderLeftColor: platformColor(item.platform) }}
+                              className="block rounded-md border border-[var(--border-warm)] border-l-4 bg-white p-2 shadow-sm transition hover:shadow-md"
                             >
                               <div className="line-clamp-2 text-xs font-medium text-stone-800">
                                 {item.title}

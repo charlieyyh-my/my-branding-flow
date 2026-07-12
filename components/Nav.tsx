@@ -17,10 +17,10 @@ export function Nav({ onNavigate }: { onNavigate?: () => void }) {
             href={l.href}
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
-            className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+            className={`flex items-center gap-3 rounded-lg border-l-4 px-3 py-2.5 text-sm font-medium transition ${
               active
-                ? "bg-[var(--brand-red)] text-white"
-                : "text-stone-700 hover:bg-stone-100 active:bg-stone-200"
+                ? "border-[var(--brand-gold)] bg-[var(--brand-red)] text-white shadow-sm"
+                : "border-transparent text-stone-700 hover:bg-stone-100 active:bg-stone-200"
             }`}
           >
             <span aria-hidden className="text-base">

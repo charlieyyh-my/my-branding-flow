@@ -39,9 +39,38 @@ export default async function ContentListPage() {
           }
         />
       ) : (
-        <div className="card overflow-x-auto">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
+        <>
+          {/* Mobile: stacked cards */}
+          <div className="space-y-3 md:hidden">
+            {items.data.map((item) => (
+              <Link
+                key={item.id}
+                href={`/content/${item.id}`}
+                className="card block p-4 transition active:bg-[var(--surface-2)]"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0 font-medium text-stone-900">
+                    {item.title}
+                  </div>
+                  <StatusBadge value={item.status} />
+                </div>
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-stone-500">
+                  <PlatformBadge value={item.platform} />
+                  <span>{formatDate(item.scheduled_date)}</span>
+                  {item.campaign_id ? (
+                    <span className="truncate">
+                      · {campaignName.get(item.campaign_id) ?? "—"}
+                    </span>
+                  ) : null}
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop / tablet: table */}
+          <div className="card hidden overflow-x-auto md:block">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead className="thead-warm border-b border-[var(--border-warm)] text-left text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 font-medium">Title</th>
                 <th className="px-4 py-3 font-medium">Platform</th>
@@ -78,8 +107,9 @@ export default async function ContentListPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
-        </div>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );
