@@ -39,8 +39,8 @@ export default async function AuditPage() {
           hint="Status changes and other mutations will appear here."
         />
       ) : (
-        <div className="card overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="card overflow-x-auto">
+          <table className="w-full min-w-[720px] text-sm">
             <thead className="border-b border-stone-200 bg-stone-50 text-left text-xs uppercase tracking-wide text-stone-500">
               <tr>
                 <th className="px-4 py-3 font-medium">When</th>

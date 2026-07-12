@@ -20,6 +20,22 @@ body {
 
 body {
   -webkit-font-smoothing: antialiased;
+  /* Guard against a stray wide element causing sideways page scroll. */
+  overflow-x: hidden;
+}
+
+/* On phones, form controls must be ≥16px or iOS Safari zooms in on focus. */
+@media (max-width: 640px) {
+  .field {
+    font-size: 16px;
+  }
+}
+
+/* Comfortable, consistent tap targets for the button classes. */
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  min-height: 40px;
 }
 
 @layer components {

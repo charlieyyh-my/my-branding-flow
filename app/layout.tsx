@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
+import { MobileNav } from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "BrandOS — Century Mark Pacific",
   description:
     "Plan, create, approve, publish, and track branded content across every platform.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -18,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <div className="flex min-h-screen">
-          <aside className="hidden w-64 shrink-0 flex-col border-r border-stone-200 bg-white p-4 md:flex">
+          <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col overflow-y-auto border-r border-stone-200 bg-white p-4 md:flex">
             <Link href="/" className="mb-6 flex items-center gap-2 px-2">
               <span
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-lg font-bold text-white"
@@ -38,10 +44,8 @@ export default function RootLayout({
           </aside>
 
           <div className="flex min-w-0 flex-1 flex-col">
-            <header className="flex items-center justify-between border-b border-stone-200 bg-white px-4 py-3 md:hidden">
-              <span className="font-bold text-stone-900">BrandOS</span>
-            </header>
-            <main className="mx-auto w-full max-w-6xl flex-1 p-6">
+            <MobileNav />
+            <main className="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
               {children}
             </main>
           </div>

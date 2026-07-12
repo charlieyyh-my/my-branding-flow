@@ -66,7 +66,7 @@ export default async function CalendarPage({
         title="Content Calendar"
         subtitle={`Week of ${formatDayMonth(days[0])} – ${formatDayMonth(days[6])}`}
         action={
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Link href={`/calendar?week=${prevWeek}`} className="btn-secondary">
               ← Prev
             </Link>
