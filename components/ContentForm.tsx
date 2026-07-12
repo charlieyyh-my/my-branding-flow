@@ -1,8 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import type { ActionState } from "@/lib/actions";
 import type { Campaign, ContentItem, WeeklyTheme } from "@/lib/types";
 import { PLATFORMS, CONTENT_STATUSES } from "@/lib/types";
@@ -24,6 +23,11 @@ export function ContentForm({
 }) {
   const [state, formAction] = useActionState(action, {});
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Controlled so the AI draft can populate the copy field.
+  const [copy, setCopy] = useState(item?.copy_body ?? "");
+  const [aiPending, setAiPending] = useState(false);
 
   // On successful edit (no redirect), refresh so server data re-renders.
   useEffect(() => {
@@ -33,8 +37,35 @@ export function ContentForm({
     }
   }, [state.ok, router]);
 
+  async function draftWithAI() {
+    const fd = new FormData(formRef.current ?? undefined);
+    setAiPending(true);
+    try {
+      const res = await fetch("/api/ai/caption", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: fd.get("title") ?? "",
+          platform: fd.get("platform") ?? "Instagram",
+          brief: fd.get("copy_body") ?? "",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast(data.error ?? "AI draft failed");
+        return;
+      }
+      setCopy(data.caption);
+      toast("Caption drafted ✨ — review and edit before saving");
+    } catch {
+      toast("Couldn’t reach the AI service");
+    } finally {
+      setAiPending(false);
+    }
+  }
+
   return (
-    <form action={formAction} className="space-y-5">
+    <form ref={formRef} action={formAction} className="space-y-5">
       {item ? <input type="hidden" name="id" value={item.id} /> : null}
       <FieldError message={state.error} />
       {state.ok ? (
@@ -96,16 +127,31 @@ export function ContentForm({
       </div>
 
       <div>
-        <label className="field-label" htmlFor="copy_body">
-          Copy
-        </label>
+        <div className="mb-1.5 flex items-center justify-between gap-2">
+          <label className="field-label mb-0" htmlFor="copy_body">
+            Copy
+          </label>
+          <button
+            type="button"
+            onClick={draftWithAI}
+            disabled={aiPending}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--brand-gold)] px-3 py-1 text-xs font-semibold text-[var(--brand-gold)] transition hover:bg-[var(--brand-gold)]/10 disabled:opacity-60"
+            title="Draft a caption with AI from the title, channel, and any notes above"
+          >
+            {aiPending ? "Drafting…" : "✨ Draft with AI"}
+          </button>
+        </div>
         <textarea
           id="copy_body"
           name="copy_body"
           className="field min-h-28"
-          defaultValue={item?.copy_body ?? ""}
-          placeholder="The post caption / body copy…"
+          value={copy}
+          onChange={(e) => setCopy(e.target.value)}
+          placeholder="Write the post copy, or tap ✨ Draft with AI to get a starting point."
         />
+        <p className="mt-1 text-xs text-[var(--ink-faint)]">
+          AI drafts are a starting point — always review before submitting for approval.
+        </p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
