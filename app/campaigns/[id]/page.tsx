@@ -65,7 +65,7 @@ export default async function CampaignDetailPage({
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <Card>
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Edit campaign
             </h2>
             <CampaignForm action={updateCampaign} campaign={campaign} />
@@ -74,15 +74,15 @@ export default async function CampaignDetailPage({
 
         <div className="space-y-6">
           <Card>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Linked content ({linked.length})
             </h2>
             {linked.length === 0 ? (
-              <p className="text-sm text-stone-400">
+              <p className="text-sm text-[var(--ink-faint)]">
                 No content linked to this campaign yet.
               </p>
             ) : (
-              <ul className="divide-y divide-stone-100">
+              <ul className="divide-y divide-[var(--border)]">
                 {linked.map((i) => (
                   <li
                     key={i.id}
@@ -90,7 +90,7 @@ export default async function CampaignDetailPage({
                   >
                     <Link
                       href={`/content/${i.id}`}
-                      className="min-w-0 truncate text-sm font-medium text-stone-800 hover:text-[var(--brand-red)]"
+                      className="min-w-0 truncate text-sm font-medium text-[var(--ink)] hover:text-[var(--brand-red)]"
                     >
                       {i.title}
                     </Link>
@@ -102,19 +102,19 @@ export default async function CampaignDetailPage({
           </Card>
 
           <Card>
-            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Dates
             </h2>
-            <p className="text-sm text-stone-600">
+            <p className="text-sm text-[var(--ink-soft)]">
               {formatDate(campaign.start_date)} – {formatDate(campaign.end_date)}
             </p>
           </Card>
 
           <Card>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Danger zone
             </h2>
-            <p className="mb-3 text-xs text-stone-500">
+            <p className="mb-3 text-xs text-[var(--ink-soft)]">
               Deleting unlinks its content items (they are not deleted).
             </p>
             <form action={deleteCampaign}>

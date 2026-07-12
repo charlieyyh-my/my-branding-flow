@@ -61,14 +61,14 @@ export function StatusControl({
                   active
                     ? "border-[var(--brand-red)] bg-[var(--brand-red)] text-white"
                     : isNext
-                      ? "border-[var(--brand-red)] bg-white text-[var(--brand-red)] hover:bg-red-50"
-                      : "border-stone-300 bg-white text-stone-500 hover:bg-stone-50"
+                      ? "border-[var(--brand-red)] bg-[var(--surface)] text-[var(--brand-red)] hover:brightness-125"
+                      : "border-[var(--border)] bg-[var(--surface)] text-[var(--ink-soft)] hover:bg-[var(--surface-2)]"
                 }`}
               >
                 {label(s)}
               </button>
               {i < CONTENT_STATUSES.length - 1 ? (
-                <span className="text-stone-300">→</span>
+                <span className="text-[var(--ink-faint)]">→</span>
               ) : null}
             </div>
           );
@@ -94,7 +94,7 @@ export function StatusControl({
         </div>
       ) : null}
       {pending ? (
-        <p className="text-sm text-stone-500">Updating…</p>
+        <p className="text-sm text-[var(--ink-soft)]">Updating…</p>
       ) : null}
     </div>
   );

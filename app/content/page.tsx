@@ -50,12 +50,12 @@ export default async function ContentListPage() {
                 className="card block p-4 transition active:bg-[var(--surface-2)]"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0 font-medium text-stone-900">
+                  <div className="min-w-0 font-medium text-[var(--ink)]">
                     {item.title}
                   </div>
                   <StatusBadge value={item.status} />
                 </div>
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-stone-500">
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-[var(--ink-soft)]">
                   <PlatformBadge value={item.platform} />
                   <span>{formatDate(item.scheduled_date)}</span>
                   {item.campaign_id ? (
@@ -86,7 +86,7 @@ export default async function ContentListPage() {
                   <td className="px-4 py-3">
                     <Link
                       href={`/content/${item.id}`}
-                      className="font-medium text-stone-900 hover:text-[var(--brand-red)]"
+                      className="font-medium text-[var(--ink)] hover:text-[var(--brand-red)]"
                     >
                       {item.title}
                     </Link>
@@ -94,7 +94,7 @@ export default async function ContentListPage() {
                   <td className="px-4 py-3">
                     <PlatformBadge value={item.platform} />
                   </td>
-                  <td className="px-4 py-3 text-stone-600">
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">
                     {item.campaign_id ? (
                       <CampaignTag
                         id={item.campaign_id}
@@ -104,7 +104,7 @@ export default async function ContentListPage() {
                       "—"
                     )}
                   </td>
-                  <td className="px-4 py-3 text-stone-600">
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">
                     {formatDate(item.scheduled_date)}
                   </td>
                   <td className="px-4 py-3">

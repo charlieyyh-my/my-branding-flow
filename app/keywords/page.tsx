@@ -57,17 +57,17 @@ export default async function KeywordsPage() {
                 className="card block p-4 transition active:bg-[var(--surface-2)]"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0 font-medium text-stone-900">
+                  <div className="min-w-0 font-medium text-[var(--ink)]">
                     {k.keyword}
                   </div>
                   <StatusBadge value={k.priority} />
                 </div>
-                <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-stone-500">
+                <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-[var(--ink-soft)]">
                   {k.category ? <span>{k.category}</span> : null}
                   {k.target_url ? <span className="text-[var(--brand-red)]">has target</span> : null}
                 </div>
                 {k.notes ? (
-                  <div className="mt-1 text-xs text-stone-400">{k.notes}</div>
+                  <div className="mt-1 text-xs text-[var(--ink-faint)]">{k.notes}</div>
                 ) : null}
               </Link>
             ))}
@@ -90,15 +90,15 @@ export default async function KeywordsPage() {
                   <td className="px-4 py-3">
                     <Link
                       href={`/keywords/${k.id}`}
-                      className="font-medium text-stone-900 hover:text-[var(--brand-red)]"
+                      className="font-medium text-[var(--ink)] hover:text-[var(--brand-red)]"
                     >
                       {k.keyword}
                     </Link>
                     {k.notes ? (
-                      <div className="text-xs text-stone-400">{k.notes}</div>
+                      <div className="text-xs text-[var(--ink-faint)]">{k.notes}</div>
                     ) : null}
                   </td>
-                  <td className="px-4 py-3 text-stone-600">
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">
                     {k.category ?? "—"}
                   </td>
                   <td className="px-4 py-3">

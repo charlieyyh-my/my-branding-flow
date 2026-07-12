@@ -50,7 +50,7 @@ export default async function GuidelineDetailPage({
           <GuidelineForm action={updateGuideline} guideline={guideline} />
         </Card>
         <Card>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
             Danger zone
           </h2>
           <form action={deleteGuideline}>

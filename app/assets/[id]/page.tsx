@@ -51,7 +51,7 @@ export default async function AssetDetailPage({
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <Card>
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Edit asset
             </h2>
             <AssetForm
@@ -64,19 +64,19 @@ export default async function AssetDetailPage({
         <div className="space-y-6">
           {asset.file_url ? (
             <Card>
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
                 Preview
               </h2>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={asset.file_url}
                 alt={asset.name}
-                className="w-full rounded-lg border border-stone-200"
+                className="w-full rounded-lg border border-[var(--border)]"
               />
             </Card>
           ) : null}
           <Card>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Danger zone
             </h2>
             <form action={deleteAsset}>

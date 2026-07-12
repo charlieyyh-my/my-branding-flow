@@ -138,9 +138,9 @@ export default async function CalendarPage({
                               key={item.id}
                               href={`/content/${item.id}`}
                               style={{ borderLeftColor: platformColor(item.platform) }}
-                              className="block rounded-md border border-[var(--border-warm)] border-l-4 bg-white p-2 shadow-sm transition hover:shadow-md"
+                              className="block rounded-md border border-[var(--border-warm)] border-l-4 bg-[var(--surface)] p-2 shadow-sm transition hover:shadow-md"
                             >
-                              <div className="line-clamp-2 text-xs font-medium text-stone-800">
+                              <div className="line-clamp-2 text-xs font-medium text-[var(--ink)]">
                                 {item.title}
                               </div>
                               <div className="mt-1">

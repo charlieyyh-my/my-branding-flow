@@ -50,7 +50,7 @@ export default async function AssetsPage() {
               href={`/assets/${a.id}`}
               className="card overflow-hidden transition hover:shadow-md"
             >
-              <div className="aspect-video bg-stone-100">
+              <div className="aspect-video bg-[var(--surface-2)]">
                 {a.file_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -62,14 +62,14 @@ export default async function AssetsPage() {
               </div>
               <div className="p-4">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="truncate font-medium text-stone-900">
+                  <h3 className="truncate font-medium text-[var(--ink)]">
                     {a.name}
                   </h3>
-                  <span className="shrink-0 rounded bg-stone-100 px-2 py-0.5 text-xs text-stone-600">
+                  <span className="shrink-0 rounded bg-[var(--surface-2)] px-2 py-0.5 text-xs text-[var(--ink-soft)]">
                     {a.asset_type ?? "file"}
                   </span>
                 </div>
-                <p className="mt-1 text-xs text-stone-400">
+                <p className="mt-1 text-xs text-[var(--ink-faint)]">
                   {a.campaign_id
                     ? campaignName.get(a.campaign_id) ?? "—"
                     : "Unassigned"}

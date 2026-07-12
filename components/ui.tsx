@@ -15,11 +15,11 @@ export function PageHeader({
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-stone-900">
+        <h1 className="text-2xl font-bold tracking-tight text-[var(--ink)]">
           {title}
         </h1>
         {subtitle ? (
-          <p className="mt-1 text-sm text-stone-500">{subtitle}</p>
+          <p className="mt-1 text-sm text-[var(--ink-soft)]">{subtitle}</p>
         ) : null}
       </div>
       {action}
@@ -105,8 +105,10 @@ export function EmptyState({
       >
         {icon}
       </div>
-      <p className="text-base font-semibold text-stone-800">{title}</p>
-      {hint ? <p className="max-w-sm text-sm text-stone-500">{hint}</p> : null}
+      <p className="text-base font-semibold text-[var(--ink)]">{title}</p>
+      {hint ? (
+        <p className="max-w-sm text-sm text-[var(--ink-soft)]">{hint}</p>
+      ) : null}
       {action ? <div className="mt-1">{action}</div> : null}
     </div>
   );
@@ -161,11 +163,13 @@ export function StatCard({
   accent?: string;
 }) {
   const inner = (
-    <div className="card p-5 transition hover:shadow-md">
-      <div className="text-sm font-medium text-stone-500">{statLabel}</div>
+    <div className="card p-5 transition hover:brightness-110">
+      <div className="text-sm font-medium text-[var(--ink-soft)]">
+        {statLabel}
+      </div>
       <div
         className="mt-2 text-3xl font-bold"
-        style={{ color: accent ?? "#1c1917" }}
+        style={{ color: accent ?? "var(--ink)" }}
       >
         {value}
       </div>
@@ -191,7 +195,7 @@ export function CampaignTag({
   id?: string | null;
   name?: string | null;
 }) {
-  if (!name) return <span className="text-stone-400">—</span>;
+  if (!name) return <span className="text-[var(--ink-faint)]">—</span>;
   return (
     <span className="inline-flex items-center gap-1.5">
       <CampaignDot seed={id ?? name} />

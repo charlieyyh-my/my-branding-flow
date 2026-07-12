@@ -38,7 +38,7 @@ export function MobileNav() {
           aria-label="Open menu"
           aria-expanded={open}
           aria-controls="mobile-drawer"
-          className="flex h-10 w-10 items-center justify-center rounded-lg text-stone-700 hover:bg-stone-100 active:bg-stone-200"
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-[var(--ink-soft)] hover:bg-[var(--surface-2)] active:bg-[var(--surface-2)]"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path
@@ -57,7 +57,7 @@ export function MobileNav() {
           >
             B
           </span>
-          <span className="font-bold text-stone-900">BrandOS</span>
+          <span className="font-bold text-[var(--ink)]">BrandOS</span>
         </Link>
 
         {/* Spacer to keep the logo centred against the 40px button */}
@@ -92,15 +92,15 @@ export function MobileNav() {
               B
             </span>
             <div className="leading-tight">
-              <div className="text-sm font-bold text-stone-900">BrandOS</div>
-              <div className="text-xs text-stone-500">Century Mark Pacific</div>
+              <div className="text-sm font-bold text-[var(--ink)]">BrandOS</div>
+              <div className="text-xs text-[var(--ink-soft)]">Century Mark Pacific</div>
             </div>
           </Link>
           <button
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Close menu"
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-stone-500 hover:bg-stone-100"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--ink-soft)] hover:bg-[var(--surface-2)]"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path
@@ -115,7 +115,7 @@ export function MobileNav() {
         <div className="overflow-y-auto">
           <Nav onNavigate={() => setOpen(false)} />
         </div>
-        <div className="mt-auto px-2 pt-6 text-xs text-stone-400">
+        <div className="mt-auto px-2 pt-6 text-xs text-[var(--ink-faint)]">
           v1 · Demo mode (no login)
         </div>
       </aside>

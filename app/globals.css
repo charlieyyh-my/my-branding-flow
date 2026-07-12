@@ -1,31 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --brand-red: #8b0000;
-  --brand-gold: #c9a84c;
-  --brand-ivory: #f5f0e8;
+  --brand-red: #d64545; /* brighter on dark for legibility */
+  --brand-red-deep: #8b0000;
+  --brand-gold: #d6b95f;
 
-  /* Warm surface system — cream page, soft ivory panels, warm hairlines. */
-  --page: #f6efe3;
-  --surface: #fffdf8;
-  --surface-2: #fbf6ec;
-  --border-warm: #e9ddc9;
-  --ink: #292018;
-  --ink-soft: #7c6f5e;
+  /* Dark / grey surface system. */
+  --page: #191b1f;
+  --surface: #23262c;
+  --surface-2: #2c3037;
+  --border: #383d45;
+  /* Back-compat alias used across earlier components. */
+  --border-warm: #383d45;
+  --ink: #ecebe8;
+  --ink-soft: #a7adb7;
+  --ink-faint: #767d88;
 }
 
 @theme inline {
-  --color-brand-red: #8b0000;
-  --color-brand-gold: #c9a84c;
-  --color-brand-ivory: #f5f0e8;
+  --color-brand-red: #d64545;
+  --color-brand-gold: #d6b95f;
 }
 
 html,
 body {
   background-color: var(--page);
   background-image: radial-gradient(
-    1200px 600px at 100% -10%,
-    rgba(201, 168, 76, 0.08),
+    1100px 550px at 100% -10%,
+    rgba(214, 185, 95, 0.06),
     transparent 60%
   );
   color: var(--ink);
@@ -33,18 +35,15 @@ body {
 
 body {
   -webkit-font-smoothing: antialiased;
-  /* Guard against a stray wide element causing sideways page scroll. */
   overflow-x: hidden;
 }
 
-/* On phones, form controls must be ≥16px or iOS Safari zooms in on focus. */
 @media (max-width: 640px) {
   .field {
     font-size: 16px;
   }
 }
 
-/* Comfortable, consistent tap targets for the button classes. */
 .btn-primary,
 .btn-secondary,
 .btn-danger {
@@ -52,39 +51,51 @@ body {
 }
 
 @layer components {
-  /* Consistent form controls without repeating utility soup everywhere. */
   .field {
-    @apply w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-[var(--ink)] shadow-sm outline-none transition;
-    border-color: var(--border-warm);
+    @apply w-full rounded-lg border px-3 py-2.5 text-sm shadow-sm outline-none transition;
+    background-color: var(--surface-2);
+    border-color: var(--border);
+    color: var(--ink);
+  }
+  .field::placeholder {
+    color: var(--ink-faint);
   }
   .field:focus {
-    @apply border-[var(--brand-red)] ring-2 ring-[var(--brand-red)]/15;
+    @apply ring-2;
+    border-color: var(--brand-red);
+    --tw-ring-color: rgba(214, 69, 69, 0.25);
   }
 
   .field-label {
-    @apply mb-1.5 block text-sm font-medium text-[var(--ink-soft)];
+    @apply mb-1.5 block text-sm font-medium;
+    color: var(--ink-soft);
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--brand-red)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#6d0000] hover:shadow disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60;
+    background-color: var(--brand-red);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border bg-[var(--surface)] px-4 py-2 text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:bg-[var(--surface-2)] disabled:cursor-not-allowed disabled:opacity-60;
-    border-color: var(--border-warm);
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold shadow-sm transition hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-60;
+    background-color: var(--surface-2);
+    border-color: var(--border);
+    color: var(--ink);
   }
 
   .btn-danger {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-60;
+    background-color: var(--surface-2);
+    border-color: rgba(214, 69, 69, 0.4);
+    color: #f2a3a3;
   }
 
   .card {
     @apply rounded-2xl border shadow-sm;
     background-color: var(--surface);
-    border-color: var(--border-warm);
+    border-color: var(--border);
   }
 
-  /* Warm table header + hover, shared across list pages. */
   .thead-warm {
     background-color: var(--surface-2);
     color: var(--ink-soft);

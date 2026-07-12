@@ -50,13 +50,13 @@ export default async function ThemeDetailPage({
       />
       <div className="max-w-2xl space-y-6">
         <Card>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-stone-500">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
             Edit theme
           </h2>
           <ThemeForm action={updateTheme} campaigns={campaigns.data} theme={theme} />
         </Card>
         <Card>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
             Danger zone
           </h2>
           <form action={deleteTheme}>

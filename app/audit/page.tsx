@@ -54,17 +54,17 @@ export default async function AuditPage() {
             <tbody className="divide-y divide-[var(--border-warm)]">
               {logs.data.map((l) => (
                 <tr key={l.id} className="row-hover">
-                  <td className="px-4 py-3 whitespace-nowrap text-stone-500">
+                  <td className="px-4 py-3 whitespace-nowrap text-[var(--ink-soft)]">
                     {formatDateTime(l.created_at)}
                   </td>
-                  <td className="px-4 py-3 text-stone-600">{l.actor ?? "—"}</td>
-                  <td className="px-4 py-3 font-medium text-stone-800">
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">{l.actor ?? "—"}</td>
+                  <td className="px-4 py-3 font-medium text-[var(--ink)]">
                     {l.action}
                   </td>
-                  <td className="px-4 py-3 text-stone-600">
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">
                     {l.object_type ?? "—"}
                   </td>
-                  <td className="px-4 py-3 text-stone-600">
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">
                     {summarise(l.old_value, l.new_value)}
                   </td>
                   <td className="px-4 py-3">

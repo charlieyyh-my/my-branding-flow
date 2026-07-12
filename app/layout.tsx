@@ -34,12 +34,12 @@ export default function RootLayout({
                 B
               </span>
               <div className="leading-tight">
-                <div className="text-sm font-bold text-stone-900">BrandOS</div>
-                <div className="text-xs text-stone-500">Century Mark Pacific</div>
+                <div className="text-sm font-bold text-[var(--ink)]">BrandOS</div>
+                <div className="text-xs text-[var(--ink-soft)]">Century Mark Pacific</div>
               </div>
             </Link>
             <Nav />
-            <div className="mt-auto px-2 pt-6 text-xs text-stone-400">
+            <div className="mt-auto px-2 pt-6 text-xs text-[var(--ink-faint)]">
               v1 · Demo mode (no login)
             </div>
           </aside>

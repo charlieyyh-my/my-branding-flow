@@ -57,13 +57,13 @@ export default async function LeadDetailPage({
       />
       <div className="max-w-2xl space-y-6">
         <Card>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-stone-500">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
             Edit lead
           </h2>
           <LeadForm action={updateLead} lead={lead} />
         </Card>
         <Card>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
             Danger zone
           </h2>
           <form action={deleteLead}>

@@ -20,7 +20,7 @@ export function Nav({ onNavigate }: { onNavigate?: () => void }) {
             className={`flex items-center gap-3 rounded-lg border-l-4 px-3 py-2.5 text-sm font-medium transition ${
               active
                 ? "border-[var(--brand-gold)] bg-[var(--brand-red)] text-white shadow-sm"
-                : "border-transparent text-stone-700 hover:bg-stone-100 active:bg-stone-200"
+                : "border-transparent text-[var(--ink-soft)] hover:bg-[var(--surface-2)] active:bg-[var(--surface-2)]"
             }`}
           >
             <span aria-hidden className="text-base">

@@ -57,17 +57,17 @@ export default async function ThemesPage() {
                 className="card block p-5 transition hover:shadow-md"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="font-semibold text-stone-900">{t.theme_name}</h3>
-                  <span className="text-xs text-stone-400">
+                  <h3 className="font-semibold text-[var(--ink)]">{t.theme_name}</h3>
+                  <span className="text-xs text-[var(--ink-faint)]">
                     Week of {formatDate(t.week_start)}
                   </span>
                 </div>
                 {t.guiding_message ? (
-                  <p className="mt-2 text-sm text-stone-600">
+                  <p className="mt-2 text-sm text-[var(--ink-soft)]">
                     “{t.guiding_message}”
                   </p>
                 ) : null}
-                <div className="mt-3 flex items-center gap-3 text-xs text-stone-400">
+                <div className="mt-3 flex items-center gap-3 text-xs text-[var(--ink-faint)]">
                   <span>
                     {t.campaign_id
                       ? campaignName.get(t.campaign_id) ?? "—"

@@ -56,18 +56,18 @@ export default async function CampaignsPage() {
               className="card p-5 transition hover:shadow-md"
             >
               <div className="mb-2 flex items-start justify-between gap-2">
-                <h3 className="flex items-center gap-2 font-semibold text-stone-900">
+                <h3 className="flex items-center gap-2 font-semibold text-[var(--ink)]">
                   <CampaignDot seed={c.id} />
                   {c.name}
                 </h3>
                 <StatusBadge value={c.status} />
               </div>
               {c.objective ? (
-                <p className="mb-3 line-clamp-2 text-sm text-stone-500">
+                <p className="mb-3 line-clamp-2 text-sm text-[var(--ink-soft)]">
                   {c.objective}
                 </p>
               ) : null}
-              <div className="flex items-center justify-between text-xs text-stone-400">
+              <div className="flex items-center justify-between text-xs text-[var(--ink-faint)]">
                 <span>
                   {formatDate(c.start_date)} – {formatDate(c.end_date)}
                 </span>

@@ -44,7 +44,7 @@ export default async function GuidelinesPage() {
           {guidelines.data.map((g) => (
             <Card key={g.id}>
               <div className="mb-2 flex items-start justify-between gap-3">
-                <h2 className="text-lg font-semibold text-stone-900">
+                <h2 className="text-lg font-semibold text-[var(--ink)]">
                   {g.section_title}
                 </h2>
                 <Link
@@ -54,7 +54,7 @@ export default async function GuidelinesPage() {
                   Edit
                 </Link>
               </div>
-              <p className="whitespace-pre-wrap text-sm leading-relaxed text-stone-700">
+              <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--ink-soft)]">
                 {g.content}
               </p>
             </Card>

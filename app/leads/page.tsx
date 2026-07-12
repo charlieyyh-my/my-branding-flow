@@ -53,16 +53,16 @@ export default async function LeadsPage() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <div className="font-medium text-stone-900">
+                    <div className="font-medium text-[var(--ink)]">
                       {l.contact_name || "—"}
                     </div>
                     {l.company ? (
-                      <div className="text-xs text-stone-500">{l.company}</div>
+                      <div className="text-xs text-[var(--ink-soft)]">{l.company}</div>
                     ) : null}
                   </div>
                   <StatusBadge value={l.status} />
                 </div>
-                <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-stone-500">
+                <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-[var(--ink-soft)]">
                   {l.source ? <span>{l.source}</span> : null}
                   {l.follow_up_date ? (
                     <span>Follow-up {formatDate(l.follow_up_date)}</span>
@@ -90,19 +90,19 @@ export default async function LeadsPage() {
                   <td className="px-4 py-3">
                     <Link
                       href={`/leads/${l.id}`}
-                      className="font-medium text-stone-900 hover:text-[var(--brand-red)]"
+                      className="font-medium text-[var(--ink)] hover:text-[var(--brand-red)]"
                     >
                       {l.contact_name || "—"}
                     </Link>
                     {l.enquiry_type ? (
-                      <div className="text-xs text-stone-400">
+                      <div className="text-xs text-[var(--ink-faint)]">
                         {l.enquiry_type}
                       </div>
                     ) : null}
                   </td>
-                  <td className="px-4 py-3 text-stone-600">{l.company || "—"}</td>
-                  <td className="px-4 py-3 text-stone-600">{l.source || "—"}</td>
-                  <td className="px-4 py-3 text-stone-600">
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">{l.company || "—"}</td>
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">{l.source || "—"}</td>
+                  <td className="px-4 py-3 text-[var(--ink-soft)]">
                     {formatDate(l.follow_up_date)}
                   </td>
                   <td className="px-4 py-3">

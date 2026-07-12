@@ -10,8 +10,8 @@ export default function Error({
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
       <div className="text-4xl">⚠️</div>
-      <h1 className="text-xl font-semibold text-stone-800">Something went wrong</h1>
-      <p className="max-w-md text-sm text-stone-500">
+      <h1 className="text-xl font-semibold text-[var(--ink)]">Something went wrong</h1>
+      <p className="max-w-md text-sm text-[var(--ink-soft)]">
         {error.message || "An unexpected error occurred. Please try again."}
       </p>
       <button onClick={reset} className="btn-primary">

@@ -79,7 +79,7 @@ export default async function ContentDetailPage({
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <Card>
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Approval workflow
             </h2>
             <StatusControl
@@ -90,7 +90,7 @@ export default async function ContentDetailPage({
           </Card>
 
           <Card>
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Edit details
             </h2>
             <ContentForm
@@ -102,15 +102,15 @@ export default async function ContentDetailPage({
           </Card>
 
           <Card>
-            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Social performance
             </h2>
-            <p className="mb-4 text-sm text-stone-500">
+            <p className="mb-4 text-sm text-[var(--ink-soft)]">
               Log reach and engagement once this item is published.
             </p>
             {itemPerf.length > 0 ? (
               <table className="mb-4 w-full text-sm">
-                <thead className="text-left text-xs uppercase text-stone-400">
+                <thead className="text-left text-xs uppercase text-[var(--ink-faint)]">
                   <tr>
                     <th className="py-1">Date</th>
                     <th className="py-1">Reach</th>
@@ -121,7 +121,7 @@ export default async function ContentDetailPage({
                 </thead>
                 <tbody>
                   {itemPerf.map((p) => (
-                    <tr key={p.id} className="border-t border-stone-100">
+                    <tr key={p.id} className="border-t border-[var(--border)]">
                       <td className="py-1">{formatDate(p.recorded_date)}</td>
                       <td className="py-1">{p.reach ?? 0}</td>
                       <td className="py-1">{p.impressions ?? 0}</td>
@@ -132,7 +132,7 @@ export default async function ContentDetailPage({
                 </tbody>
               </table>
             ) : (
-              <p className="mb-4 text-sm text-stone-400">
+              <p className="mb-4 text-sm text-[var(--ink-faint)]">
                 No performance logged yet.
               </p>
             )}
@@ -142,7 +142,7 @@ export default async function ContentDetailPage({
 
         <div className="space-y-6">
           <Card>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Details
             </h2>
             <dl className="space-y-3 text-sm">
@@ -152,8 +152,8 @@ export default async function ContentDetailPage({
               <Detail label="Scheduled" value={formatDate(item.scheduled_date)} />
               <Detail label="Time" value={item.scheduled_time} />
               <div>
-                <dt className="text-stone-500">Published URL</dt>
-                <dd className="mt-0.5 break-words font-medium text-stone-800">
+                <dt className="text-[var(--ink-soft)]">Published URL</dt>
+                <dd className="mt-0.5 break-words font-medium text-[var(--ink)]">
                   {item.published_url ? (
                     <a
                       href={item.published_url}
@@ -173,17 +173,17 @@ export default async function ContentDetailPage({
 
           {item.copy_body ? (
             <Card>
-              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-stone-500">
+              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
                 Copy
               </h2>
-              <p className="whitespace-pre-wrap text-sm text-stone-700">
+              <p className="whitespace-pre-wrap text-sm text-[var(--ink-soft)]">
                 {item.copy_body}
               </p>
             </Card>
           ) : null}
 
           <Card>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
               Danger zone
             </h2>
             <form action={deleteContentItem}>
@@ -203,8 +203,8 @@ export default async function ContentDetailPage({
 function Detail({ label, value }: { label: string; value?: string | null }) {
   return (
     <div>
-      <dt className="text-stone-500">{label}</dt>
-      <dd className="mt-0.5 font-medium text-stone-800">{value || "—"}</dd>
+      <dt className="text-[var(--ink-soft)]">{label}</dt>
+      <dd className="mt-0.5 font-medium text-[var(--ink)]">{value || "—"}</dd>
     </div>
   );
 }
