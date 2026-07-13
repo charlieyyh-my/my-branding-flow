@@ -7,9 +7,19 @@ import { saveCaptionDraft, reviewCaptionDraft } from "@/lib/actions";
 import { StatusBadge } from "@/components/ui";
 import { toast } from "@/components/Toast";
 
+const TWEAK_PRESETS = [
+  "Make it shorter",
+  "More festive 🧧",
+  "More formal",
+  "Punchier hook",
+  "Add a question",
+  "Fewer hashtags",
+];
+
 export function CaptionDraft({ item }: { item: ContentItem }) {
   const [pending, setPending] = useState(false);
   const [reviewing, startReview] = useTransition();
+  const [tweak, setTweak] = useState("");
   const router = useRouter();
 
   const hasDraft = Boolean(item.caption_draft);
@@ -24,7 +34,9 @@ export function CaptionDraft({ item }: { item: ContentItem }) {
         body: JSON.stringify({
           title: item.title,
           platform: item.platform,
-          brief: item.copy_body ?? "",
+          // When redrafting, tweak from the current draft; else from the copy.
+          brief: (hasDraft ? item.caption_draft : item.copy_body) ?? "",
+          instructions: tweak.trim(),
         }),
       });
       const data = await res.json();
@@ -74,18 +86,53 @@ export function CaptionDraft({ item }: { item: ContentItem }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-sm text-[var(--ink-soft)]">
-          Generate a caption with AI, then accept it into the copy or reject it.
-        </p>
-        <button
-          type="button"
-          onClick={draft}
-          disabled={pending}
-          className="btn-secondary !px-3 !py-1.5 text-xs"
-        >
-          {pending ? "Drafting…" : hasDraft ? "✨ Redraft" : "✨ Draft caption with AI"}
-        </button>
+      <p className="text-sm text-[var(--ink-soft)]">
+        Generate a caption with AI, then accept it into the copy or reject it.
+      </p>
+
+      {/* Regenerate-with-tweaks box */}
+      <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-3">
+        <div className="mb-2 flex flex-wrap gap-1.5">
+          {TWEAK_PRESETS.map((p) => {
+            const active = tweak === p;
+            return (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setTweak(active ? "" : p)}
+                className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${
+                  active
+                    ? "border-[var(--brand-gold)] bg-[var(--brand-gold)]/15 text-[var(--ink)]"
+                    : "border-[var(--border)] text-[var(--ink-soft)] hover:brightness-125"
+                }`}
+              >
+                {p}
+              </button>
+            );
+          })}
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <input
+            className="field min-w-0 flex-1"
+            value={tweak}
+            onChange={(e) => setTweak(e.target.value)}
+            placeholder="Optional tweak — e.g. mention Chinese New Year, keep it under 2 lines"
+          />
+          <button
+            type="button"
+            onClick={draft}
+            disabled={pending}
+            className="btn-secondary shrink-0 !px-3 !py-1.5 text-xs"
+          >
+            {pending
+              ? "Drafting…"
+              : hasDraft
+                ? tweak.trim()
+                  ? "✨ Redraft with tweak"
+                  : "✨ Redraft"
+                : "✨ Draft caption with AI"}
+          </button>
+        </div>
       </div>
 
       {hasDraft ? (

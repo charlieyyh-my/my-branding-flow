@@ -18,7 +18,12 @@ const PLATFORM_GUIDE: Record<string, string> = {
 };
 
 export async function POST(request: Request) {
-  let body: { title?: string; platform?: string; brief?: string };
+  let body: {
+    title?: string;
+    platform?: string;
+    brief?: string;
+    instructions?: string;
+  };
   try {
     body = await request.json();
   } catch {
@@ -28,6 +33,7 @@ export async function POST(request: Request) {
   const title = (body.title ?? "").trim();
   const platform = (body.platform ?? "Instagram").trim();
   const brief = (body.brief ?? "").trim();
+  const instructions = (body.instructions ?? "").trim().slice(0, 300);
 
   if (!title && !brief) {
     return NextResponse.json(
@@ -54,6 +60,7 @@ export async function POST(request: Request) {
     PLATFORM_GUIDE[platform] ? `Channel style — ${PLATFORM_GUIDE[platform]}` : "",
     title ? `Post title: ${title}` : "",
     brief ? `Brief / draft copy to work from:\n${brief}` : "",
+    instructions ? `Adjustment requested — apply this: ${instructions}` : "",
     "\nWrite the full caption now.",
   ]
     .filter(Boolean)
