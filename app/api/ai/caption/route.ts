@@ -64,33 +64,55 @@ async function draftWithClaude(
     .trim();
 }
 
+// Model quota/availability varies per key, so try a few in order.
+const GEMINI_MODELS = [
+  "gemini-flash-latest",
+  "gemini-2.0-flash",
+  "gemini-2.0-flash-lite",
+];
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 async function draftWithGemini(
   apiKey: string,
   system: string,
   user: string,
 ): Promise<string> {
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: system }] },
-        contents: [{ role: "user", parts: [{ text: user }] }],
-        generationConfig: { maxOutputTokens: 600, temperature: 0.9 },
-      }),
-    },
-  );
-  if (!res.ok) {
-    const detail = await res.text();
-    throw new Error(`Gemini ${res.status}: ${detail.slice(0, 200)}`);
+  const body = JSON.stringify({
+    systemInstruction: { parts: [{ text: system }] },
+    contents: [{ role: "user", parts: [{ text: user }] }],
+    generationConfig: { maxOutputTokens: 600, temperature: 0.9 },
+  });
+
+  let lastErr = "";
+  for (const model of GEMINI_MODELS) {
+    // Retry transient 503 (high demand) on the same model before moving on.
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        { method: "POST", headers: { "Content-Type": "application/json" }, body },
+      );
+      if (res.ok) {
+        const data = await res.json();
+        const parts = data?.candidates?.[0]?.content?.parts ?? [];
+        const text = parts
+          .map((p: { text?: string }) => p.text ?? "")
+          .join("")
+          .trim();
+        if (text) return text;
+        lastErr = `${model}: empty response`;
+        break;
+      }
+      lastErr = `${model}: ${res.status} ${(await res.text()).slice(0, 100)}`;
+      // 503 = transient overload → retry same model; other errors → next model.
+      if (res.status === 503 && attempt < 3) {
+        await sleep(1200 * attempt);
+        continue;
+      }
+      break;
+    }
   }
-  const data = await res.json();
-  const parts = data?.candidates?.[0]?.content?.parts ?? [];
-  return parts
-    .map((p: { text?: string }) => p.text ?? "")
-    .join("")
-    .trim();
+  throw new Error(`Gemini failed. ${lastErr}`);
 }
 
 export async function POST(request: Request) {
