@@ -194,6 +194,77 @@ export async function setContentStatus(fd: FormData) {
   revalidatePath("/");
 }
 
+// AI caption draft is stored separately and reviewed before it becomes the
+// live copy (docs/AGENTIC_LAYER.md — draft_caption is low-risk, human-reviewed).
+export async function saveCaptionDraft(input: {
+  id: string;
+  caption: string;
+  source: string;
+  confidence: number;
+}): Promise<ActionState> {
+  if (!input.id || !input.caption) return { error: "Missing draft data." };
+  try {
+    const supabase = await client();
+    const { error } = await supabase
+      .from("content_items")
+      .update({
+        caption_draft: input.caption,
+        caption_source: input.source,
+        caption_confidence: input.confidence,
+        caption_review_status: "unreviewed",
+      })
+      .eq("id", input.id);
+    if (error) return { error: error.message };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Failed to save draft." };
+  }
+  await writeAudit({
+    action: "caption_drafted",
+    object_type: "content_item",
+    object_id: input.id,
+    new_value: { source: input.source, confidence: input.confidence },
+  });
+  revalidatePath(`/content/${input.id}`);
+  return { ok: true };
+}
+
+export async function reviewCaptionDraft(input: {
+  id: string;
+  decision: "accepted" | "rejected";
+}): Promise<ActionState> {
+  const { id, decision } = input;
+  if (!id) return { error: "Missing id." };
+  try {
+    const supabase = await client();
+    const { data: before } = await supabase
+      .from("content_items")
+      .select("caption_draft")
+      .eq("id", id)
+      .maybeSingle();
+    const update: Record<string, unknown> = { caption_review_status: decision };
+    // Accepting promotes the draft into the live copy body.
+    if (decision === "accepted" && before?.caption_draft) {
+      update.copy_body = before.caption_draft;
+    }
+    const { error } = await supabase
+      .from("content_items")
+      .update(update)
+      .eq("id", id);
+    if (error) return { error: error.message };
+    await writeAudit({
+      action: decision === "accepted" ? "caption_accepted" : "caption_rejected",
+      object_type: "content_item",
+      object_id: id,
+      risk_level: "low",
+    });
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Failed to update draft." };
+  }
+  revalidatePath(`/content/${id}`);
+  revalidatePath("/content");
+  return { ok: true };
+}
+
 export async function deleteContentItem(fd: FormData) {
   const id = str(fd, "id");
   if (!id) return;

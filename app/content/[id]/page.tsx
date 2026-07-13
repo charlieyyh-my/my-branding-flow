@@ -12,6 +12,7 @@ import {
 } from "@/lib/actions";
 import { ContentForm } from "@/components/ContentForm";
 import { StatusControl } from "@/components/StatusControl";
+import { CaptionDraft } from "@/components/CaptionDraft";
 import { PerformanceForm } from "@/components/PerformanceForm";
 import { DeleteButton } from "@/components/DeleteButton";
 import {
@@ -87,6 +88,13 @@ export default async function ContentDetailPage({
               status={item.status}
               publishedUrl={item.published_url}
             />
+          </Card>
+
+          <Card>
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ink-soft)]">
+              AI caption assistant
+            </h2>
+            <CaptionDraft item={item} />
           </Card>
 
           <Card>
