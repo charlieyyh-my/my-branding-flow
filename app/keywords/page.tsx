@@ -7,6 +7,7 @@ import {
   ErrorState,
   ConfigNotice,
 } from "@/components/ui";
+import { KeywordSuggester } from "@/components/KeywordSuggester";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +32,8 @@ export default async function KeywordsPage() {
           </Link>
         }
       />
+
+      {keywords.configured && !keywords.error ? <KeywordSuggester /> : null}
 
       {!keywords.configured ? (
         <ConfigNotice />

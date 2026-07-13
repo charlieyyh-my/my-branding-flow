@@ -489,6 +489,28 @@ export async function updateKeyword(
   redirect("/keywords?flash=Keywords+updated");
 }
 
+export async function addSuggestedKeyword(input: {
+  keyword: string;
+  category?: string;
+  priority?: string;
+}) {
+  const keyword = input.keyword?.trim();
+  if (!keyword) return { error: "Missing keyword." };
+  try {
+    const supabase = await client();
+    const { error } = await supabase.from("seo_keywords").insert({
+      keyword,
+      category: input.category?.trim() || null,
+      priority: input.priority?.trim() || "medium",
+    });
+    if (error) return { error: error.message };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Failed to add." };
+  }
+  revalidatePath("/keywords");
+  return { ok: true };
+}
+
 export async function deleteKeyword(fd: FormData) {
   const id = str(fd, "id");
   if (!id) return;
