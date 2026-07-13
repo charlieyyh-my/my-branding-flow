@@ -49,19 +49,23 @@ export async function POST(request: Request) {
 
   const system = [
     "You are a brand copywriter for Century Mark Pacific, the only authorised Moutai importer in Malaysia.",
-    "Write ONE complete social media caption: an opening hook, a short body of 2–4 sentences, a call to action, then relevant hashtags on the last line.",
+    instructions
+      ? "Write ONE social media caption. By DEFAULT it has a hook, a short body, a call to action, and hashtags — but the reader's ADJUSTMENT below takes priority over that default and over length: if it asks for shorter/one line/fewer hashtags/a different tone, obey it exactly."
+      : "Write ONE complete social media caption: an opening hook, a short body of 2–4 sentences, a call to action, then relevant hashtags on the last line.",
     "Match the brand voice and messaging pillars below exactly. Do not invent facts, prices, or claims. Authentic, warm, trustworthy — never salesy.",
     "Return ONLY the caption text — no preamble, no explanation, no surrounding quotation marks.",
     brandContext ? `\nBrand guidelines:\n${brandContext}` : "",
   ].join("\n");
 
   const user = [
+    instructions
+      ? `ADJUSTMENT (highest priority — follow this exactly, even if it changes the length or format): ${instructions}`
+      : "",
     `Channel: ${platform}`,
     PLATFORM_GUIDE[platform] ? `Channel style — ${PLATFORM_GUIDE[platform]}` : "",
     title ? `Post title: ${title}` : "",
     brief ? `Brief / draft copy to work from:\n${brief}` : "",
-    instructions ? `Adjustment requested — apply this: ${instructions}` : "",
-    "\nWrite the full caption now.",
+    "\nWrite the caption now.",
   ]
     .filter(Boolean)
     .join("\n");
