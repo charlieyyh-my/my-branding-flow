@@ -56,7 +56,11 @@ export function ContentForm({
         return;
       }
       setCopy(data.caption);
-      toast("Caption drafted ✨ — review and edit before saving");
+      toast(
+        data.source === "template"
+          ? "Draft ready (free template) — review and edit"
+          : "Caption drafted with AI ✨ — review and edit",
+      );
     } catch {
       toast("Couldn’t reach the AI service");
     } finally {
